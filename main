@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+struct Node {
+	int item;
+	Node *next;
+};
+Node *head ;
+
+void insert(int item){
+	Node *ptr= new Node;
+	ptr->item= item;
+	ptr->next= NULL;
+	if(head == NULL){
+		head= ptr;
+	}
+	else{
+		ptr->next= head;
+		head= ptr;
+	}
+}
+
+void print(){
+	Node *temp= head;
+	while(temp!= NULL){
+		cout<<temp->item<<"  ";
+		temp= temp->next;
+	}
+}
+
+void Delete(int del_item){
+	Node *temp= head;
+	Node*del;
+	while(temp->next!= NULL){
+		if(head->item== del_item){
+			del= head;
+			head= temp->next;
+			return;
+		}
+		else{
+			if(temp->next->item== del_item){
+				del= temp->next;
+				temp->next= temp->next->next;
+				return;
+			}
+		}
+		temp= temp->next;
+	}
+	delete(del);
+}
+int main(){
+head= NULL;
+insert(5);
+insert(2);
+insert(9);
+insert(4);
+insert(6);
+print();
+Delete(2);
+cout<<"\ndelete from center"<<endl;
+print();
+
+return 0;
+}
